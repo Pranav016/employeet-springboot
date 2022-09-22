@@ -2,6 +2,8 @@ package com.test.employeet.controller;
 
 import com.test.employeet.entity.Department;
 import com.test.employeet.service.DepartmentService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +16,8 @@ public class DepartmentController {
     @Autowired
     private DepartmentService departmentService;
 
+    private final Logger LOGGER= LoggerFactory.getLogger(DepartmentController.class);
+
     @GetMapping("/departments")
     public List<Department> fetchAllDepartments(){
         return departmentService.fetchDepartmentList();
@@ -21,6 +25,7 @@ public class DepartmentController {
 
     @PostMapping("/departments")
     public Department saveDepartment(@Valid @RequestBody Department department){
+        LOGGER.info("Inside save department of DepartmentController.");
         return departmentService.saveDepartment(department);
     }
 
